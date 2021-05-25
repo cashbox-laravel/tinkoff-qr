@@ -1,6 +1,6 @@
 <?php
 
-namespace Helldar\CashierTinkoff\Helpers;
+namespace Helldar\CashierDriver\Tinkoff\Helpers;
 
 use Helldar\Cashier\Helpers\Statuses as BaseStatus;
 

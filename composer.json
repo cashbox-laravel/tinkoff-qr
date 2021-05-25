@@ -28,7 +28,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Helldar\\Cashier\\Drivers\\Tinkoff\\": "src"
+            "Helldar\\CashierDriver\\Tinkoff\\": "src"
         }
     },
     "autoload-dev": {
