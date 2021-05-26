@@ -7,18 +7,32 @@ use Helldar\Cashier\Helpers\Statuses as BaseStatus;
 class Statuses extends BaseStatus
 {
     public const NEW = [
+        'FORM_SHOWED',
         'NEW',
     ];
 
     public const REFUNDING = [
-        'AUTHORIZING',
         'AUTHORIZED',
-        'CONFIRMING',
+        'AUTHORIZING',
         'CONFIRMED',
+        'CONFIRMING',
         'REFUNDING',
     ];
 
-    public const REFUNDED = [];
+    public const REFUNDED = [
+        'PARTIAL_REFUNDED',
+        'REFUNDED',
+        'REVERSED',
+    ];
 
-    public const FAILED = [];
+    public const FAILED = [
+        'ATTEMPTS_EXPIRED',
+        'CANCELED',
+        'DEADLINE_EXPIRED',
+        'REJECTED',
+    ];
+
+    public const SUCCESS = [
+        'CONFIRMED',
+    ];
 }

@@ -1,13 +1,14 @@
 {
-    "name": "andrey-helldar/cashier-tinkoff",
-    "description": "Driver for andrey-helldar/cashier",
+    "name": "andrey-helldar/cashier-tinkoff-qr",
+    "description": "Driver for payment with QR codes via Tinkoff (see andrey-helldar/cashier)",
     "type": "library",
     "license": "MIT",
     "keywords": [
         "bank",
         "billing",
         "cashier",
-        "tinkoff"
+        "tinkoff",
+        "qr"
     ],
     "authors": [
         {
@@ -16,8 +17,8 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/andrey-helldar/cashier/issues",
-        "source": "https://github.com/andrey-helldar/cashier"
+        "issues": "https://github.com/andrey-helldar/cashier-tinkoff-qr/issues",
+        "source": "https://github.com/andrey-helldar/cashier-tinkoff-qr"
     },
     "require": {
         "php": "^7.2.5|^8.0"
@@ -28,7 +29,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Helldar\\CashierDriver\\Tinkoff\\": "src"
+            "Helldar\\CashierDriver\\Tinkoff\\QR\\": "src"
         }
     },
     "autoload-dev": {
