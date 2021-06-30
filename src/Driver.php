@@ -14,7 +14,7 @@ class Driver extends BaseDriver
 
     protected $dev_host = 'https://rest-api-test.tinkoff.ru';
 
-    public function init(): Response
+    public function start(): Response
     {
         // TODO: Implement init() method.
     }
