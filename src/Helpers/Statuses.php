@@ -1,6 +1,6 @@
 <?php
 
-namespace Helldar\CashierDriver\Tinkoff\QR\Helpers;
+namespace Helldar\CashierDriver\Tinkoff\QrCode\Helpers;
 
 use Helldar\Cashier\Helpers\Statuses as BaseStatus;
 
