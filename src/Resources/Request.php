@@ -12,6 +12,8 @@ abstract class Request extends BasePayment
             'OrderId' => $this->paymentId(),
 
             'Amount' => $this->getSum(),
+
+            'Currency' => $this->getCurrency(),
         ];
     }
 }
