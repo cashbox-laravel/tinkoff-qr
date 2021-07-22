@@ -5,14 +5,15 @@ namespace Helldar\CashierDriver\Tinkoff\QrCode;
 use Helldar\Cashier\DTO\Request;
 use Helldar\Cashier\Resources\Response;
 use Helldar\Cashier\Services\Driver as BaseDriver;
-use Helldar\CashierDriver\Sber\QrCode\Helpers\Statuses;
-use Helldar\CashierDriver\Tinkoff\Auth\DTO\Client;
-use Helldar\CashierDriver\Tinkoff\Auth\Facades\Auth;
+use Helldar\CashierDriver\Tinkoff\Auth\Concerns\Authorize;
 use Helldar\CashierDriver\Tinkoff\QrCode\Helpers\Exception;
+use Helldar\CashierDriver\Tinkoff\QrCode\Helpers\Statuses;
 use Psr\Http\Message\UriInterface;
 
 class Driver extends BaseDriver
 {
+    use Authorize;
+
     protected $statuses = Statuses::class;
 
     protected $response = Resources\Response::class;
@@ -21,7 +22,15 @@ class Driver extends BaseDriver
 
     protected $production_host = 'https://securepay.tinkoff.ru';
 
-    protected $dev_host = 'https://rest-api-test.tinkoff.ru';
+    /**
+     * According to information from technical support,
+     * the test domain behaves incorrectly and often returns errors.
+     * Therefore, Tinkoff Bank technical support recommends using
+     * the production version of the API for both testing and basic requests.
+     *
+     * @var string
+     */
+    protected $dev_host = 'https://securepay.tinkoff.ru';
 
     protected $uri_create = '/v2/Init';
 
@@ -37,7 +46,7 @@ class Driver extends BaseDriver
 
         $request = $this->requestDto(
             $this->url($this->uri_get_qr),
-            $this->body([
+            $this->content([
                 'PaymentId' => $init->paymentId(),
             ]),
             $this->headers()
@@ -50,7 +59,7 @@ class Driver extends BaseDriver
     {
         $request = $this->requestDto(
             $this->url($this->uri_status),
-            $this->body([
+            $this->content([
                 'PaymentId' => $this->model->cashier->payment_id,
             ]),
             $this->headers()
@@ -63,7 +72,7 @@ class Driver extends BaseDriver
     {
         $request = $this->requestDto(
             $this->url($this->uri_revocation),
-            $this->body([
+            $this->content([
                 'PaymentId' => $this->model->cashier->payment_id,
 
                 'Amount' => $this->resource->getSum(),
@@ -80,34 +89,18 @@ class Driver extends BaseDriver
     {
         $request = $this->requestDto(
             $this->url($this->uri_create),
-            $this->body($this->resource->toArray(), false),
+            $this->content($this->resource->toArray(), false),
             $this->headers()
         );
 
         return $this->request($request);
     }
 
-    protected function headers(bool $hash = true): array
+    protected function headers(): array
     {
         return [
             'Content-Type' => 'application/json',
         ];
-    }
-
-    protected function authorization(array $data, bool $hash = true): array
-    {
-        $auth = $this->authDto($data, $hash);
-
-        return Auth::accessToken($auth);
-    }
-
-    protected function authDto(array $data, bool $hash): Client
-    {
-        return Client::make()
-            ->hash($hash)
-            ->data($data)
-            ->clientId($this->auth->getClientId())
-            ->clientSecret($this->auth->getClientSecret());
     }
 
     protected function requestDto(UriInterface $url, array $data, array $headers): Request
@@ -116,12 +109,5 @@ class Driver extends BaseDriver
             ->setUrl($url)
             ->setData($data)
             ->setHeaders($headers);
-    }
-
-    protected function body(array $data, bool $hash = true): array
-    {
-        $auth = $this->authorization($data, $hash);
-
-        return array_merge($data, $auth);
     }
 }

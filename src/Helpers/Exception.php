@@ -6,8 +6,9 @@ use Helldar\Cashier\Exceptions\Client\BankInternalErrorException;
 use Helldar\Cashier\Exceptions\Client\BuyerNotFoundClientException;
 use Helldar\Cashier\Exceptions\Client\ContactTheSellerClientException;
 use Helldar\Cashier\Exceptions\Client\TryAgainLaterClientException;
+use Helldar\Cashier\Helpers\Exception as BaseException;
 
-class Exception extends \Helldar\Cashier\Helpers\Exception
+class Exception extends BaseException
 {
     protected $codes = [
         7 => BuyerNotFoundClientException::class,
