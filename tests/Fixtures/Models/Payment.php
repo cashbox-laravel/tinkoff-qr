@@ -5,7 +5,7 @@ namespace Tests\Fixtures\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property-read \Tests\Fixtures\Models\CashierDetail $cashier
+ * @property \Tests\Fixtures\Models\CashierDetail $cashier
  */
 class Payment extends Model
 {

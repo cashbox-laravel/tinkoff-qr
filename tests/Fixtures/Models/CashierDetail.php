@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Tests\TestCase;
 
 /**
- * @property-read string $payment_id
- * @property-read Response $details
+ * @property string $payment_id
+ * @property Response $details
  */
 class CashierDetail extends Model
 {
