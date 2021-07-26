@@ -41,7 +41,7 @@ class ResponseTest extends TestCase
         $this->assertSame([
             Response::KEY_STATUS => TestCase::STATUS,
             Response::KEY_URL    => TestCase::URL,
-        ], $this->response()->toArray());
+        ], $response->toArray());
 
         $response->put('foo', 'bar');
         $response->put(Response::KEY_STATUS, 'FORM_SHOWED');
@@ -53,7 +53,7 @@ class ResponseTest extends TestCase
         $this->assertSame([
             Response::KEY_STATUS => 'FORM_SHOWED',
             Response::KEY_URL    => TestCase::URL,
-        ], $this->response()->toArray());
+        ], $response->toArray());
     }
 
     protected function response(): Response
