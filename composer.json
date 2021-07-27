@@ -22,7 +22,7 @@
     },
     "require": {
         "php": "^7.3|^8.0",
-        "andrey-helldar/cashier-tinkoff-auth": "^1.3.1",
+        "andrey-helldar/cashier-tinkoff-auth": "dev-main",
         "psr/http-message": "^1.0"
     },
     "require-dev": {
