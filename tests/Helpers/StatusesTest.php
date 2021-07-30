@@ -5,7 +5,7 @@ namespace Tests\Helpers;
 use Helldar\CashierDriver\Tinkoff\QrCode\Helpers\Statuses;
 use Tests\TestCase;
 
-final class StatusesTest extends TestCase
+class StatusesTest extends TestCase
 {
     public function testModel()
     {

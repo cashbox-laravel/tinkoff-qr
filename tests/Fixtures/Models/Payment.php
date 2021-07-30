@@ -1,16 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Fixtures\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model as BaseModel;
 
-/**
- * @property \Tests\Fixtures\Models\CashierDetail $cashier
- */
-class Payment extends Model
+class Payment extends BaseModel
 {
-    public function getCashierAttribute(): CashierDetail
-    {
-        return new CashierDetail();
-    }
 }
