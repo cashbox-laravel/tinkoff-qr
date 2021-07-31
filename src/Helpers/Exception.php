@@ -10,7 +10,7 @@ use Helldar\Cashier\Helpers\ExceptionManager;
 
 class Exception extends ExceptionManager
 {
-    protected $codes = [
+    protected static $codes = [
         7 => BuyerNotFoundClientException::class,
 
         53 => ContactTheSellerClientException::class,

@@ -6,7 +6,7 @@ namespace Helldar\CashierDriver\Tinkoff\QrCode\Responses;
 
 use Helldar\Cashier\Http\Response;
 
-class Refund extends Response
+class State extends Response
 {
     protected $map = [
         self::KEY_EXTERNAL_ID => 'PaymentId',

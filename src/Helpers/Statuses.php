@@ -2,7 +2,7 @@
 
 namespace Helldar\CashierDriver\Tinkoff\QrCode\Helpers;
 
-use Helldar\Cashier\Helpers\Statuses as BaseStatus;
+use Helldar\Cashier\Services\Statuses as BaseStatus;
 
 class Statuses extends BaseStatus
 {

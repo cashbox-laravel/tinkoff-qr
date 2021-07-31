@@ -3,17 +3,17 @@
 namespace Helldar\CashierDriver\Tinkoff\QrCode;
 
 use Helldar\Cashier\Services\Driver as BaseDriver;
-use Helldar\CashierDriver\Tinkoff\Auth\Support\Auth;
 use Helldar\CashierDriver\Tinkoff\QrCode\Helpers\Exception;
 use Helldar\CashierDriver\Tinkoff\QrCode\Helpers\Statuses;
 use Helldar\CashierDriver\Tinkoff\QrCode\Requests\Cancel;
 use Helldar\CashierDriver\Tinkoff\QrCode\Requests\GetQR;
 use Helldar\CashierDriver\Tinkoff\QrCode\Requests\GetState;
 use Helldar\CashierDriver\Tinkoff\QrCode\Requests\Init;
-use Helldar\CashierDriver\Tinkoff\QrCode\Responses\Check;
-use Helldar\CashierDriver\Tinkoff\QrCode\Responses\Create;
+use Helldar\CashierDriver\Tinkoff\QrCode\Resources\Details;
+use Helldar\CashierDriver\Tinkoff\QrCode\Responses\QrCode;
 use Helldar\CashierDriver\Tinkoff\QrCode\Responses\Refund;
-use Helldar\Contracts\Cashier\Http\Responses\Response;
+use Helldar\CashierDriver\Tinkoff\QrCode\Responses\State;
+use Helldar\Contracts\Cashier\Http\Response;
 
 class Driver extends BaseDriver
 {
@@ -21,32 +21,34 @@ class Driver extends BaseDriver
 
     protected $statuses = Statuses::class;
 
+    protected $details = Details::class;
+
     public function start(): Response
     {
         $this->init();
 
-        $request = GetQR::make($this->model, Auth::class);
+        $request = GetQR::make($this->model);
 
-        return $this->request($request, Create::class);
+        return $this->request($request, QrCode::class);
     }
 
     public function check(): Response
     {
-        $request = GetState::make($this->model, Auth::class);
+        $request = GetState::make($this->model);
 
-        return $this->request($request, Check::class);
+        return $this->request($request, State::class);
     }
 
     public function refund(): Response
     {
-        $request = Cancel::make($this->model, Auth::class);
+        $request = Cancel::make($this->model);
 
         return $this->request($request, Refund::class);
     }
 
     protected function init(): Response
     {
-        $request = Init::make($this->model, Auth::class, false);
+        $request = Init::make($this->model);
 
         return $this->request($request, Responses\Init::class);
     }

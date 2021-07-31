@@ -11,7 +11,7 @@ class GetState extends BaseRequest
     public function getRawBody(): array
     {
         return [
-            'PaymentId' => $this->model->getBankPaymentId(),
+            'PaymentId' => $this->model->getExternalId(),
         ];
     }
 }

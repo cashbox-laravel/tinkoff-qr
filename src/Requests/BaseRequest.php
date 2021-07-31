@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Helldar\CashierDriver\Tinkoff\QrCode\Requests;
 
-use Helldar\Cashier\Resources\Request;
+use Helldar\Cashier\Http\Request;
+use Helldar\CashierDriver\Tinkoff\Auth\Support\Auth;
 
 abstract class BaseRequest extends Request
 {
-    protected $production_host = 'https://securepay.tinkoff.ru';
+    protected $host = 'https://securepay.tinkoff.ru';
+
+    protected $auth = Auth::class;
 
     public function getRawHeaders(): array
     {
@@ -20,6 +23,6 @@ abstract class BaseRequest extends Request
 
     protected function getHost(): string
     {
-        return $this->production_host;
+        return $this->host;
     }
 }
