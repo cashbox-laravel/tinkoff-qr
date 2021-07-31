@@ -67,7 +67,7 @@ class QrCodeTest extends TestCase
     }
 
     /**
-     * @return \Helldar\Contracts\Cashier\Http\Response|\Helldar\CashierDriver\Tinkoff\QrCode\Responses\QrCode
+     * @return \Helldar\CashierDriver\Tinkoff\QrCode\Responses\QrCode|\Helldar\Contracts\Cashier\Http\Response
      */
     protected function response(): Response
     {
