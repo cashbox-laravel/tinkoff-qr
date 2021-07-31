@@ -7,9 +7,10 @@ use Helldar\Cashier\Exceptions\Http\BaseException;
 use Helldar\Cashier\Exceptions\Http\BuyerNotFoundClientException;
 use Helldar\Cashier\Exceptions\Http\ContactTheSellerClientException;
 use Helldar\CashierDriver\Tinkoff\QrCode\Helpers\Exception;
+use Helldar\Contracts\Http\Builder as HttpBuilder;
 use Helldar\Support\Facades\Http\Builder;
-use Psr\Http\Message\UriInterface;
 use Tests\TestCase;
+use Throwable;
 
 class ExceptionTest extends TestCase
 {
@@ -20,7 +21,9 @@ class ExceptionTest extends TestCase
         $this->expectExceptionMessage('https://example.com/foo: Buyer Not Found');
         $this->expectExceptionCode(404);
 
-        Exception::make()->throw(7, $this->uri());
+        $e = $this->exception(7);
+
+        Exception::throw($e, $this->uri());
     }
 
     public function test7String()
@@ -30,7 +33,9 @@ class ExceptionTest extends TestCase
         $this->expectExceptionMessage('https://example.com/foo: Buyer Not Found');
         $this->expectExceptionCode(404);
 
-        Exception::make()->throw('7', $this->uri());
+        $e = $this->exception('7');
+
+        Exception::throw($e, $this->uri());
     }
 
     public function test53()
@@ -40,7 +45,9 @@ class ExceptionTest extends TestCase
         $this->expectExceptionMessage('https://example.com/foo: Contact The Seller');
         $this->expectExceptionCode(409);
 
-        Exception::make()->throw(53, $this->uri());
+        $e = $this->exception(53);
+
+        Exception::throw($e, $this->uri());
     }
 
     public function test53String()
@@ -50,7 +57,9 @@ class ExceptionTest extends TestCase
         $this->expectExceptionMessage('https://example.com/foo: Contact The Seller');
         $this->expectExceptionCode(409);
 
-        Exception::make()->throw('53', $this->uri());
+        $e = $this->exception('53');
+
+        Exception::throw($e, $this->uri());
     }
 
     public function testDefault()
@@ -60,7 +69,9 @@ class ExceptionTest extends TestCase
         $this->expectExceptionMessage('https://example.com/foo: Bad Request');
         $this->expectExceptionCode(400);
 
-        Exception::make()->throw(10000, $this->uri());
+        $e = $this->exception(10000);
+
+        Exception::throw($e, $this->uri());
     }
 
     public function testDefaultString()
@@ -70,10 +81,17 @@ class ExceptionTest extends TestCase
         $this->expectExceptionMessage('https://example.com/foo: Bad Request');
         $this->expectExceptionCode(400);
 
-        Exception::make()->throw('10000', $this->uri());
+        $e = $this->exception('10000');
+
+        Exception::throw($e, $this->uri());
     }
 
-    protected function uri(): UriInterface
+    protected function exception($code): Throwable
+    {
+        return new \Exception('Foo', $code);
+    }
+
+    protected function uri(): HttpBuilder
     {
         return Builder::parse('https://example.com/foo');
     }
