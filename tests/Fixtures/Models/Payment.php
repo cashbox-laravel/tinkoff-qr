@@ -30,16 +30,37 @@ use Tests\TestCase;
  * @property int $currency
  * @property int $status_id
  * @property int $type_id
- * @property string $external_id
  * @property string $id;
  */
 class Payment extends BaseModel
 {
     use Casheable;
 
+    protected $fillable = ['id', 'type_id', 'status_id', 'sum', 'currency', 'created_at'];
+
+    protected $casts = [
+        'id' => 'integer',
+
+        'type_id'   => 'integer',
+        'status_id' => 'integer',
+
+        'sum'      => 'float',
+        'currency' => 'integer',
+    ];
+
     protected function getIdAttribute(): string
     {
         return TestCase::PAYMENT_ID;
+    }
+
+    protected function getTypeIdAttribute(): int
+    {
+        return TestCase::MODEL_TYPE_ID;
+    }
+
+    protected function getStatusIdAttribute(): int
+    {
+        return TestCase::MODEL_STATUS_ID;
     }
 
     protected function getSumAttribute(): float
@@ -55,20 +76,5 @@ class Payment extends BaseModel
     protected function getCreatedAtAttribute(): Carbon
     {
         return Carbon::parse(TestCase::PAYMENT_DATE);
-    }
-
-    protected function getExternalIdAttribute(): string
-    {
-        return TestCase::PAYMENT_EXTERNAL_ID;
-    }
-
-    protected function getTypeIdAttribute(): int
-    {
-        return TestCase::MODEL_TYPE_ID;
-    }
-
-    protected function getStatusIdAttribute(): int
-    {
-        return TestCase::MODEL_STATUS_ID;
     }
 }
