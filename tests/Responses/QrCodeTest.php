@@ -72,12 +72,13 @@ class QrCodeTest extends TestCase
     protected function response(): Response
     {
         return QrCode::make([
-            'TerminalKey' => self::TERMINAL_KEY,
-            'OrderId'     => self::PAYMENT_ID,
-            'Success'     => true,
-            'Data'        => self::URL,
-            'PaymentId'   => self::PAYMENT_EXTERNAL_ID,
-            'ErrorCode'   => 0,
+            'TerminalKey' => $this->getTerminalKey(),
+
+            'OrderId'   => self::PAYMENT_ID,
+            'Success'   => true,
+            'Data'      => self::URL,
+            'PaymentId' => self::PAYMENT_EXTERNAL_ID,
+            'ErrorCode' => 0,
         ]);
     }
 }

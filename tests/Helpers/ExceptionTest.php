@@ -21,11 +21,10 @@ use Helldar\Cashier\Exceptions\Http\BadRequestClientException;
 use Helldar\Cashier\Exceptions\Http\BaseException;
 use Helldar\Cashier\Exceptions\Http\BuyerNotFoundClientException;
 use Helldar\Cashier\Exceptions\Http\ContactTheSellerClientException;
-use Helldar\CashierDriver\Tinkoff\QrCode\Helpers\Exception;
+use Helldar\CashierDriver\Tinkoff\QrCode\Exceptions\Manager;
 use Helldar\Contracts\Http\Builder as HttpBuilder;
 use Helldar\Support\Facades\Http\Builder;
 use Tests\TestCase;
-use Throwable;
 
 class ExceptionTest extends TestCase
 {
@@ -36,9 +35,7 @@ class ExceptionTest extends TestCase
         $this->expectExceptionMessage('https://example.com/foo: Buyer Not Found');
         $this->expectExceptionCode(404);
 
-        $e = $this->exception(7);
-
-        Exception::throw($e, $this->uri());
+        $this->throw(7);
     }
 
     public function test7String()
@@ -48,9 +45,17 @@ class ExceptionTest extends TestCase
         $this->expectExceptionMessage('https://example.com/foo: Buyer Not Found');
         $this->expectExceptionCode(404);
 
-        $e = $this->exception('7');
+        $this->throw('7');
+    }
 
-        Exception::throw($e, $this->uri());
+    public function test7Reason()
+    {
+        $this->expectException(BuyerNotFoundClientException::class);
+        $this->expectException(BaseException::class);
+        $this->expectExceptionMessage('https://example.com/foo: Foo Bar');
+        $this->expectExceptionCode(404);
+
+        $this->throw(7, 'Foo Bar');
     }
 
     public function test53()
@@ -60,9 +65,7 @@ class ExceptionTest extends TestCase
         $this->expectExceptionMessage('https://example.com/foo: Contact The Seller');
         $this->expectExceptionCode(409);
 
-        $e = $this->exception(53);
-
-        Exception::throw($e, $this->uri());
+        $this->throw(53);
     }
 
     public function test53String()
@@ -72,9 +75,17 @@ class ExceptionTest extends TestCase
         $this->expectExceptionMessage('https://example.com/foo: Contact The Seller');
         $this->expectExceptionCode(409);
 
-        $e = $this->exception('53');
+        $this->throw('53');
+    }
 
-        Exception::throw($e, $this->uri());
+    public function test53Reason()
+    {
+        $this->expectException(ContactTheSellerClientException::class);
+        $this->expectException(BaseException::class);
+        $this->expectExceptionMessage('https://example.com/foo: Foo Bar');
+        $this->expectExceptionCode(409);
+
+        $this->throw(53, 'Foo Bar');
     }
 
     public function testDefault()
@@ -84,9 +95,7 @@ class ExceptionTest extends TestCase
         $this->expectExceptionMessage('https://example.com/foo: Bad Request');
         $this->expectExceptionCode(400);
 
-        $e = $this->exception(10000);
-
-        Exception::throw($e, $this->uri());
+        $this->throw(10000);
     }
 
     public function testDefaultString()
@@ -96,18 +105,33 @@ class ExceptionTest extends TestCase
         $this->expectExceptionMessage('https://example.com/foo: Bad Request');
         $this->expectExceptionCode(400);
 
-        $e = $this->exception('10000');
-
-        Exception::throw($e, $this->uri());
+        $this->throw('10000');
     }
 
-    protected function exception($code): Throwable
+    public function testDefaultReason()
     {
-        return new \Exception('Foo', $code);
+        $this->expectException(BadRequestClientException::class);
+        $this->expectException(BaseException::class);
+        $this->expectExceptionMessage('https://example.com/foo: Foo Bar');
+        $this->expectExceptionCode(400);
+
+        $this->throw(10000, 'Foo Bar');
+    }
+
+    protected function throw($code, string $reason = null)
+    {
+        $this->manager()->throw($this->uri(), $code, [
+            'Message' => $reason,
+        ]);
     }
 
     protected function uri(): HttpBuilder
     {
         return Builder::parse('https://example.com/foo');
+    }
+
+    protected function manager(): Manager
+    {
+        return new Manager();
     }
 }

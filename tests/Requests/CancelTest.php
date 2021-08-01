@@ -74,11 +74,13 @@ class CancelTest extends TestCase
         $this->assertIsArray($request->body());
 
         $this->assertSame([
-            'PaymentId'   => self::PAYMENT_EXTERNAL_ID,
-            'Amount'      => self::PAYMENT_SUM_FORMATTED,
-            'Currency'    => self::CURRENCY_FORMATTED,
-            'TerminalKey' => self::TERMINAL_KEY,
-            'Token'       => '33bd84720f0ba541df4f9947be43bea7c5c1eff743e9ccb45c393c04a17239fb',
+            'PaymentId' => self::PAYMENT_EXTERNAL_ID,
+            'Amount'    => self::PAYMENT_SUM_FORMATTED,
+            'Currency'  => self::CURRENCY_FORMATTED,
+
+            'TerminalKey' => $this->getTerminalKey(),
+
+            'Token' => '668f52d9fb6f6ff75b4a319b7bc34552cf39c82cc0cf2e7a2146f54b8977cb01',
         ], $request->body());
     }
 

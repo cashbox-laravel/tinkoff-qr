@@ -17,24 +17,22 @@
 
 namespace Tests;
 
+use Helldar\Cashier\Config\Driver as DriverConfig;
 use Helldar\Cashier\Constants\Driver as DriverConstant;
+use Helldar\Cashier\Facades\Config\Payment as PaymentConfig;
 use Helldar\Cashier\Models\CashierDetail;
-use Helldar\Cashier\Providers\ObserverServiceProvider;
 use Helldar\Cashier\Providers\ServiceProvider;
 use Helldar\CashierDriver\Tinkoff\QrCode\Driver;
 use Helldar\Contracts\Cashier\Http\Request;
 use Helldar\Contracts\Cashier\Resources\Details;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
+use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Tests\Fixtures\Models\Payment;
 use Tests\Fixtures\Resources\Model;
 
 abstract class TestCase extends BaseTestCase
 {
-    public const TERMINAL_KEY = '123456';
-
-    public const TERMINAL_SECRET = '1q2w3e4r5t';
-
     public const PAYMENT_EXTERNAL_ID = '456789';
 
     public const PAYMENT_ID = '1234567890';
@@ -59,16 +57,18 @@ abstract class TestCase extends BaseTestCase
 
     public const MODEL_STATUS_ID = 0;
 
+    protected $loadEnvironmentVariables = true;
+
     protected function getPackageProviders($app): array
     {
-        return [
-            ServiceProvider::class,
-            ObserverServiceProvider::class,
-        ];
+        return [ServiceProvider::class];
     }
 
-    protected function getEnvironmentSetUp($app)
+    protected function getEnvironmentSetup($app)
     {
+        $app->useEnvironmentPath(__DIR__ . '/../');
+        $app->bootstrapWith([LoadEnvironmentVariables::class]);
+
         /** @var \Illuminate\Config\Repository $config */
         $config = $app['config'];
 
@@ -81,12 +81,17 @@ abstract class TestCase extends BaseTestCase
         $config->set('cashier.drivers.tinkoff_qr', [
             DriverConstant::DRIVER  => Driver::class,
             DriverConstant::DETAILS => Model::class,
+
+            DriverConstant::CLIENT_ID     => env('CASHIER_TINKOFF_CLIENT_ID'),
+            DriverConstant::CLIENT_SECRET => env('CASHIER_TINKOFF_CLIENT_SECRET'),
         ]);
     }
 
     protected function model(Details $details = null): Payment
     {
-        $payment = new Payment();
+        $model = PaymentConfig::getModel();
+
+        $payment = new $model();
 
         return $payment->setRelation('cashier', $this->detailsRelation($payment, $details));
     }
@@ -117,6 +122,23 @@ abstract class TestCase extends BaseTestCase
 
     protected function modelRequest(): Model
     {
-        return Model::make($this->model());
+        return Model::make($this->model(), $this->config());
+    }
+
+    protected function config(): DriverConfig
+    {
+        $config = config('cashier.drivers.tinkoff_qr');
+
+        return DriverConfig::make($config);
+    }
+
+    protected function getTerminalKey(): string
+    {
+        return config('cashier.drivers.tinkoff_qr.client_id');
+    }
+
+    protected function getTerminalSecret(): string
+    {
+        return config('cashier.drivers.tinkoff_qr.client_secret');
     }
 }

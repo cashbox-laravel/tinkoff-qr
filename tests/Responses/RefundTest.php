@@ -58,12 +58,13 @@ class RefundTest extends TestCase
     protected function response(): Response
     {
         return Refund::make([
-            'TerminalKey' => self::TERMINAL_KEY,
-            'Success'     => true,
-            'Status'      => self::STATUS,
-            'ErrorCode'   => 0,
-            'PaymentId'   => self::PAYMENT_EXTERNAL_ID,
-            'OrderId'     => self::PAYMENT_ID,
+            'TerminalKey' => $this->getTerminalKey(),
+
+            'Success'   => true,
+            'Status'    => self::STATUS,
+            'ErrorCode' => 0,
+            'PaymentId' => self::PAYMENT_EXTERNAL_ID,
+            'OrderId'   => self::PAYMENT_ID,
         ]);
     }
 }

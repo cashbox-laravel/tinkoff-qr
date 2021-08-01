@@ -74,11 +74,12 @@ class InitTest extends TestCase
         $this->assertIsArray($request->body());
 
         $this->assertSame([
-            'OrderId'     => self::PAYMENT_ID,
-            'Amount'      => self::PAYMENT_SUM_FORMATTED,
-            'Currency'    => self::CURRENCY_FORMATTED,
-            'TerminalKey' => self::TERMINAL_KEY,
-            'Token'       => self::TERMINAL_SECRET,
+            'OrderId'  => self::PAYMENT_ID,
+            'Amount'   => self::PAYMENT_SUM_FORMATTED,
+            'Currency' => self::CURRENCY_FORMATTED,
+
+            'TerminalKey' => $this->getTerminalKey(),
+            'Token'       => $this->getTerminalSecret(),
         ], $request->body());
     }
 

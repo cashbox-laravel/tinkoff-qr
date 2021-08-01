@@ -29,6 +29,9 @@
          stopOnFailure="false"
          verbose="true"
 >
+    <php>
+        <env name="APP_KEY" value="base64:cW+4bNmhMQKcLH/+u+uByODdGBuXAgd1nzZpufnIwks="/>
+    </php>
     <coverage processUncoveredFiles="true">
         <include>
             <directory suffix=".php">./src</directory>

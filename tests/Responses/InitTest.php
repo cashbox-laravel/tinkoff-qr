@@ -58,13 +58,14 @@ class InitTest extends TestCase
     protected function response(): Response
     {
         return Init::make([
-            'TerminalKey' => self::TERMINAL_KEY,
-            'Amount'      => self::PAYMENT_SUM_FORMATTED,
-            'OrderId'     => self::PAYMENT_ID,
-            'Success'     => true,
-            'Status'      => self::STATUS,
-            'PaymentId'   => self::PAYMENT_EXTERNAL_ID,
-            'ErrorCode'   => 0,
+            'TerminalKey' => $this->getTerminalKey(),
+
+            'Amount'    => self::PAYMENT_SUM_FORMATTED,
+            'OrderId'   => self::PAYMENT_ID,
+            'Success'   => true,
+            'Status'    => self::STATUS,
+            'PaymentId' => self::PAYMENT_EXTERNAL_ID,
+            'ErrorCode' => 0,
         ]);
     }
 }

@@ -28,16 +28,6 @@ class Model extends BaseModel
         return $this->model->external_id;
     }
 
-    protected function clientId(): string
-    {
-        return $this->model->client_id;
-    }
-
-    protected function clientSecret(): string
-    {
-        return $this->model->client_secret;
-    }
-
     protected function paymentId(): string
     {
         return $this->model->id;
@@ -48,9 +38,9 @@ class Model extends BaseModel
         return $this->model->sum;
     }
 
-    protected function currency(): string
+    protected function currency(): int
     {
-        return (string) $this->model->currency;
+        return $this->model->currency;
     }
 
     protected function createdAt(): Carbon

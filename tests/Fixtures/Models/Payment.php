@@ -30,8 +30,6 @@ use Tests\TestCase;
  * @property int $currency
  * @property int $status_id
  * @property int $type_id
- * @property string $client_id
- * @property string $client_secret
  * @property string $external_id
  * @property string $id;
  */
@@ -42,16 +40,6 @@ class Payment extends BaseModel
     protected function getIdAttribute(): string
     {
         return TestCase::PAYMENT_ID;
-    }
-
-    protected function getClientIdAttribute(): string
-    {
-        return TestCase::TERMINAL_KEY;
-    }
-
-    protected function getClientSecretAttribute(): string
-    {
-        return TestCase::TERMINAL_SECRET;
     }
 
     protected function getSumAttribute(): float

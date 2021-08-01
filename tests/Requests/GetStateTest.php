@@ -74,9 +74,11 @@ class GetStateTest extends TestCase
         $this->assertIsArray($request->body());
 
         $this->assertSame([
-            'PaymentId'   => self::PAYMENT_EXTERNAL_ID,
-            'TerminalKey' => self::TERMINAL_KEY,
-            'Token'       => '436227a440ff1e46688aa41b35a1261dbc8035c8db8bc6585612c7ae3ee734f5',
+            'PaymentId' => self::PAYMENT_EXTERNAL_ID,
+
+            'TerminalKey' => $this->getTerminalKey(),
+
+            'Token' => 'dbcbdf5539c35132b63c1b54e0f107cc96e71cf96040ba54dec5e140255b2e63',
         ], $request->body());
     }
 

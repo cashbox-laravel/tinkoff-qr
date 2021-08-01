@@ -58,12 +58,13 @@ class StateTest extends TestCase
     protected function response(): Response
     {
         return State::make([
-            'TerminalKey' => self::TERMINAL_KEY,
-            'OrderId'     => self::PAYMENT_ID,
-            'Success'     => true,
-            'Status'      => self::STATUS,
-            'PaymentId'   => self::PAYMENT_EXTERNAL_ID,
-            'ErrorCode'   => 0,
+            'TerminalKey' => $this->getTerminalKey(),
+
+            'OrderId'   => self::PAYMENT_ID,
+            'Success'   => true,
+            'Status'    => self::STATUS,
+            'PaymentId' => self::PAYMENT_EXTERNAL_ID,
+            'ErrorCode' => 0,
         ]);
     }
 }
