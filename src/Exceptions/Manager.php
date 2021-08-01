@@ -15,17 +15,17 @@
  * @see https://github.com/andrey-helldar/cashier-tinkoff-qr
  */
 
-namespace Helldar\CashierDriver\Tinkoff\QrCode\Helpers;
+namespace Helldar\CashierDriver\Tinkoff\QrCode\Exceptions;
 
 use Helldar\Cashier\Exceptions\Http\BankInternalErrorException;
 use Helldar\Cashier\Exceptions\Http\BuyerNotFoundClientException;
 use Helldar\Cashier\Exceptions\Http\ContactTheSellerClientException;
 use Helldar\Cashier\Exceptions\Http\TryAgainLaterClientException;
-use Helldar\Cashier\Helpers\ExceptionManager;
+use Helldar\Cashier\Exceptions\Manager as ExceptionManager;
 
-class Exception extends ExceptionManager
+class Manager extends ExceptionManager
 {
-    protected static $codes = [
+    protected $codes = [
         7 => BuyerNotFoundClientException::class,
 
         53 => ContactTheSellerClientException::class,
@@ -50,4 +50,8 @@ class Exception extends ExceptionManager
 
         9999 => BankInternalErrorException::class,
     ];
+
+    protected $code_keys = ['ErrorCode'];
+
+    protected $reason_keys = ['Details', 'Message'];
 }

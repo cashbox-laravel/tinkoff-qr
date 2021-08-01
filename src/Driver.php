@@ -18,7 +18,7 @@
 namespace Helldar\CashierDriver\Tinkoff\QrCode;
 
 use Helldar\Cashier\Services\Driver as BaseDriver;
-use Helldar\CashierDriver\Tinkoff\QrCode\Helpers\Exception;
+use Helldar\CashierDriver\Tinkoff\QrCode\Exceptions\Manager;
 use Helldar\CashierDriver\Tinkoff\QrCode\Helpers\Statuses;
 use Helldar\CashierDriver\Tinkoff\QrCode\Requests\Cancel;
 use Helldar\CashierDriver\Tinkoff\QrCode\Requests\GetQR;
@@ -32,7 +32,7 @@ use Helldar\Contracts\Cashier\Http\Response;
 
 class Driver extends BaseDriver
 {
-    protected $exceptions = Exception::class;
+    protected $exceptions = Manager::class;
 
     protected $statuses = Statuses::class;
 
