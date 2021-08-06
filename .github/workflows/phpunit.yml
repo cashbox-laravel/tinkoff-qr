@@ -28,7 +28,7 @@ jobs:
                 run: composer self-update
 
             -   name: Install dependencies
-                run: composer require laravel/framework:^${{ matrix.laravel }} --prefer-stable --no-interaction
+                run: composer require laravel/framework:^${{ matrix.laravel }} --prefer-stable --prefer-dist --no-progress --no-interaction
 
             -   name: Execute tests
                 run: sudo vendor/bin/phpunit
