@@ -40,7 +40,9 @@ class Driver extends BaseDriver
 
     public function start(): Response
     {
-        $this->init();
+        $initialized = $this->init();
+
+        $this->initialized($initialized);
 
         $request = GetQR::make($this->model);
 
@@ -66,5 +68,12 @@ class Driver extends BaseDriver
         $request = Init::make($this->model);
 
         return $this->request($request, Responses\Init::class);
+    }
+
+    protected function initialized(Response $initialized): void
+    {
+        $external_id = $initialized->getExternalId();
+
+        $this->payment->cashier()->updateOrCreate(compact('external_id'));
     }
 }

@@ -29,8 +29,6 @@ class Cancel extends BaseRequest
             'PaymentId' => $this->model->getExternalId(),
 
             'Amount' => $this->model->getSum(),
-
-            'Currency' => $this->model->getCurrency(),
         ];
     }
 }

@@ -19,7 +19,7 @@ class RequestPayment extends Model
 
     protected $table = 'payments';
 
-    protected $fillable = ['id', 'type_id', 'status_id', 'sum', 'currency', 'created_at'];
+    protected $fillable = ['id', 'type_id', 'status_id', 'sum', 'currency'];
 
     protected $casts = [
         'id' => 'integer',

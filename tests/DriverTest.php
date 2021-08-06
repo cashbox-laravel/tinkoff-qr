@@ -21,6 +21,7 @@ use Helldar\Cashier\Http\Response;
 use Helldar\CashierDriver\Tinkoff\QrCode\Driver as QR;
 use Helldar\Contracts\Cashier\Driver as DriverContract;
 use Helldar\Contracts\Cashier\Http\Response as ResponseContract;
+use Helldar\Support\Facades\Http\Url;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\database\seeders\DatabaseSeeder;
 use Tests\Fixtures\Models\RequestPayment;
@@ -37,22 +38,47 @@ class DriverTest extends TestCase
 
         $this->assertInstanceOf(Response::class, $response);
         $this->assertInstanceOf(ResponseContract::class, $response);
+
+        $this->assertIsString($response->getExternalId());
+        $this->assertMatchesRegularExpression('/^(\d+)$/', $response->getExternalId());
+
+        $this->assertNull($response->getStatus());
+
+        $this->assertTrue(Url::is($response->getUrl()));
     }
 
     public function testCheck()
     {
+        $this->driver()->start();
+
         $response = $this->driver()->check();
 
         $this->assertInstanceOf(Response::class, $response);
         $this->assertInstanceOf(ResponseContract::class, $response);
+
+        $this->assertIsString($response->getExternalId());
+        $this->assertMatchesRegularExpression('/^(\d+)$/', $response->getExternalId());
+
+        $this->assertSame('FORM_SHOWED', $response->getStatus());
+
+        $this->assertSame([
+            'status' => 'FORM_SHOWED',
+        ], $response->toArray());
     }
 
     public function testRefund()
     {
+        $this->driver()->start();
+
         $response = $this->driver()->refund();
 
         $this->assertInstanceOf(Response::class, $response);
         $this->assertInstanceOf(ResponseContract::class, $response);
+
+        $this->assertIsString($response->getExternalId());
+        $this->assertMatchesRegularExpression('/^(\d+)$/', $response->getExternalId());
+
+        $this->assertSame('CANCELED', $response->getStatus());
     }
 
     protected function setUp(): void
@@ -73,7 +99,7 @@ class DriverTest extends TestCase
 
     protected function payment(): RequestPayment
     {
-        return RequestPayment::findOrFail(self::PAYMENT_ID);
+        return RequestPayment::firstOrFail();
     }
 
     protected function runSeeders()
