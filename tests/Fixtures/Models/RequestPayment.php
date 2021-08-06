@@ -4,8 +4,6 @@ namespace Tests\Fixtures\Models;
 
 use Helldar\Cashier\Concerns\Casheable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
-use Tests\TestCase;
 
 /**
  * @property \Illuminate\Support\Carbon $created_at
@@ -19,6 +17,8 @@ class RequestPayment extends Model
 {
     use Casheable;
 
+    protected $table = 'payments';
+
     protected $fillable = ['id', 'type_id', 'status_id', 'sum', 'currency', 'created_at'];
 
     protected $casts = [
@@ -30,9 +30,4 @@ class RequestPayment extends Model
         'sum'      => 'float',
         'currency' => 'integer',
     ];
-
-    protected function getCreatedAtAttribute(): Carbon
-    {
-        return Carbon::parse(TestCase::PAYMENT_DATE);
-    }
 }

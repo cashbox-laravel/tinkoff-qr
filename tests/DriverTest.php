@@ -21,11 +21,14 @@ use Helldar\Cashier\Http\Response;
 use Helldar\CashierDriver\Tinkoff\QrCode\Driver as QR;
 use Helldar\Contracts\Cashier\Driver as DriverContract;
 use Helldar\Contracts\Cashier\Http\Response as ResponseContract;
-use Tests\Fixtures\Models\ReadyPayment;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\database\seeders\DatabaseSeeder;
 use Tests\Fixtures\Models\RequestPayment;
 
 class DriverTest extends TestCase
 {
+    use RefreshDatabase;
+
     protected $model = RequestPayment::class;
 
     public function testStart()
@@ -52,6 +55,13 @@ class DriverTest extends TestCase
         $this->assertInstanceOf(ResponseContract::class, $response);
     }
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->runSeeders();
+    }
+
     protected function driver(): DriverContract
     {
         $model = $this->payment();
@@ -61,8 +71,15 @@ class DriverTest extends TestCase
         return QR::make($config, $model);
     }
 
-    protected function payment(): ReadyPayment
+    protected function payment(): RequestPayment
     {
-        return new ReadyPayment();
+        return RequestPayment::findOrFail(self::PAYMENT_ID);
+    }
+
+    protected function runSeeders()
+    {
+        $seeder = new DatabaseSeeder();
+
+        $seeder->run();
     }
 }

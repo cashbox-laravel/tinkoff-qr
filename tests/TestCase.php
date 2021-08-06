@@ -89,6 +89,12 @@ abstract class TestCase extends BaseTestCase
         ]);
     }
 
+    protected function defineDatabaseMigrations()
+    {
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../vendor/andrey-helldar/cashier/database/migrations/main');
+    }
+
     protected function model(Details $details = null): ReadyPayment
     {
         $model = PaymentConfig::getModel();

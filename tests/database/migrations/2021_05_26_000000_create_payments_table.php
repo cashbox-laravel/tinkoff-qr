@@ -19,14 +19,14 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePaymentTable extends Migration
+class CreatePaymentsTable extends Migration
 {
     protected $table = 'payments';
 
     public function up()
     {
         Schema::create($this->table, function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('id');
 
             $table->smallInteger('type_id');
             $table->smallInteger('status_id');
