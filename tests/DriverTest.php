@@ -18,7 +18,7 @@
 namespace Tests;
 
 use Helldar\Cashier\Http\Response;
-use Helldar\CashierDriver\Tinkoff\QrCode\Driver as QD;
+use Helldar\CashierDriver\Tinkoff\QrCode\Driver as QR;
 use Helldar\Contracts\Cashier\Driver as DriverContract;
 use Helldar\Contracts\Cashier\Http\Response as ResponseContract;
 use Tests\Fixtures\Models\ReadyPayment;
@@ -58,7 +58,7 @@ class DriverTest extends TestCase
 
         $config = $this->config();
 
-        return QD::make($config, $model);
+        return QR::make($config, $model);
     }
 
     protected function payment(): ReadyPayment
