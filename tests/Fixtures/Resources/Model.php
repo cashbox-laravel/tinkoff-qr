@@ -20,12 +20,12 @@ namespace Tests\Fixtures\Resources;
 use Helldar\Cashier\Resources\Model as BaseModel;
 use Illuminate\Support\Carbon;
 
-/** @property \Tests\Fixtures\Models\Payment $model */
+/** @property \Tests\Fixtures\Models\ReadyPayment $model */
 class Model extends BaseModel
 {
     public function getExternalId(): ?string
     {
-        return $this->model->external_id;
+        return $this->model->cashier->external_id;
     }
 
     protected function paymentId(): string

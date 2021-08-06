@@ -28,7 +28,7 @@ use Helldar\Contracts\Cashier\Resources\Details;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
 use Orchestra\Testbench\TestCase as BaseTestCase;
-use Tests\Fixtures\Models\Payment;
+use Tests\Fixtures\Models\ReadyPayment;
 use Tests\Fixtures\Resources\Model;
 
 abstract class TestCase extends BaseTestCase
@@ -59,6 +59,8 @@ abstract class TestCase extends BaseTestCase
 
     protected $loadEnvironmentVariables = true;
 
+    protected $model = ReadyPayment::class;
+
     protected function getPackageProviders($app): array
     {
         return [ServiceProvider::class];
@@ -72,7 +74,7 @@ abstract class TestCase extends BaseTestCase
         /** @var \Illuminate\Config\Repository $config */
         $config = $app['config'];
 
-        $config->set('cashier.payment.model', Payment::class);
+        $config->set('cashier.payment.model', $this->model);
 
         $config->set('cashier.payment.map', [
             self::MODEL_TYPE_ID => 'tinkoff_qr',
@@ -87,7 +89,7 @@ abstract class TestCase extends BaseTestCase
         ]);
     }
 
-    protected function model(Details $details = null): Payment
+    protected function model(Details $details = null): ReadyPayment
     {
         $model = PaymentConfig::getModel();
 
@@ -99,7 +101,7 @@ abstract class TestCase extends BaseTestCase
     protected function detailsRelation(EloquentModel $model, ?Details $details): CashierDetail
     {
         $details = new CashierDetail([
-            'item_type'   => Payment::class,
+            'item_type'   => ReadyPayment::class,
             'item_id'     => self::PAYMENT_ID,
             'external_id' => self::PAYMENT_EXTERNAL_ID,
             'details'     => $details,

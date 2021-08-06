@@ -21,10 +21,13 @@ use Helldar\Cashier\Http\Response;
 use Helldar\CashierDriver\Tinkoff\QrCode\Driver as QD;
 use Helldar\Contracts\Cashier\Driver as DriverContract;
 use Helldar\Contracts\Cashier\Http\Response as ResponseContract;
-use Tests\Fixtures\Models\Payment;
+use Tests\Fixtures\Models\ReadyPayment;
+use Tests\Fixtures\Models\RequestPayment;
 
 class DriverTest extends TestCase
 {
+    protected $model = RequestPayment::class;
+
     public function testStart()
     {
         $response = $this->driver()->start();
@@ -58,8 +61,8 @@ class DriverTest extends TestCase
         return QD::make($config, $model);
     }
 
-    protected function payment(): Payment
+    protected function payment(): ReadyPayment
     {
-        return new Payment();
+        return new ReadyPayment();
     }
 }

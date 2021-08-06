@@ -20,7 +20,7 @@ declare(strict_types=1);
 namespace Tests\Fixtures\Models;
 
 use Helldar\Cashier\Concerns\Casheable;
-use Illuminate\Database\Eloquent\Model as BaseModel;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
@@ -32,7 +32,7 @@ use Tests\TestCase;
  * @property int $type_id
  * @property string $id;
  */
-class Payment extends BaseModel
+class ReadyPayment extends Model
 {
     use Casheable;
 
