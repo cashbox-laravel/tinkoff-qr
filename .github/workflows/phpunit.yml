@@ -31,7 +31,6 @@ jobs:
                 run: composer require \
                     laravel/framework:^${{ matrix.laravel }} \
                     --prefer-stable \
-                    --prefer-dist \
                     --no-progress \
                     --no-interaction
 
