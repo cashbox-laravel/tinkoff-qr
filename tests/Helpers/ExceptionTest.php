@@ -30,6 +30,7 @@ class ExceptionTest extends TestCase
 {
     public function test7()
     {
+        dd(env('TEST_SECRET'));
         $this->expectException(BuyerNotFoundClientException::class);
         $this->expectException(BaseException::class);
         $this->expectExceptionMessage('https://example.com/foo: Buyer Not Found');
