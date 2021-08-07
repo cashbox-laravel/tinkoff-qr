@@ -30,12 +30,6 @@ class ExceptionTest extends TestCase
 {
     public function test7()
     {
-        dd(
-            getenv('CASHIER_TINKOFF_CLIENT_ID'),
-            $_ENV['CASHIER_TINKOFF_CLIENT_ID'] ?? null,
-            $_SERVER['CASHIER_TINKOFF_CLIENT_ID'] ?? null
-        );
-
         $this->expectException(BuyerNotFoundClientException::class);
         $this->expectException(BaseException::class);
         $this->expectExceptionMessage('https://example.com/foo: Buyer Not Found');
