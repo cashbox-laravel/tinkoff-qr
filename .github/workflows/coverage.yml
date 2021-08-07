@@ -24,8 +24,8 @@ jobs:
 
             -   name: Store environment variables
                 run: |
-                    echo "CASHIER_TINKOFF_CLIENT_ID: ${{ secrets.CASHIER_TINKOFF_CLIENT_ID }}" >> .env
-                    echo "CASHIER_TINKOFF_CLIENT_SECRET: ${{ secrets.CASHIER_TINKOFF_CLIENT_SECRET }}" >> .env
+                    echo "CASHIER_TINKOFF_CLIENT_ID=${{ secrets.CASHIER_TINKOFF_CLIENT_ID }}" >> .env
+                    echo "CASHIER_TINKOFF_CLIENT_SECRET=${{ secrets.CASHIER_TINKOFF_CLIENT_SECRET }}" >> .env
 
             -   name: Install dependencies
                 run: composer update --prefer-stable --prefer-dist --no-progress --no-interaction
