@@ -22,17 +22,20 @@ jobs:
                     extensions: curl, mbstring, zip, pcntl, pdo, pdo_sqlite, iconv, bcmath
                     coverage: xdebug
 
-            -   name: Composer self update
-                run: composer self-update
-
             -   name: Install dependencies
                 run: composer update --prefer-stable --prefer-dist --no-progress --no-interaction
 
             -   name: Execute tests
                 env:
+                    CASHIER_TEST_1: ${{ secrets.CASHIER_TEST }}
+                    CASHIER_TEST_2: $CASHIER_TEST
+                    CASHIER_TEST_3: $SECRETS_CASHIER_TEST
                     CASHIER_TINKOFF_CLIENT_ID: ${{ secrets.CASHIER_TINKOFF_CLIENT_ID }}
                     CASHIER_TINKOFF_CLIENT_SECRET: ${{ secrets.CASHIER_TINKOFF_CLIENT_SECRET }}
                 run: |
+                    echo $CASHIER_TEST_1
+                    echo $CASHIER_TEST_2
+                    echo $CASHIER_TEST_3
                     mkdir -p build/logs
                     sudo vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
 
