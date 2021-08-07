@@ -22,13 +22,15 @@ jobs:
                     extensions: curl, mbstring, zip, pcntl, pdo, pdo_sqlite, iconv, bcmath
                     coverage: xdebug
 
+            -   name: Store environment variables
+                run: |
+                    echo "CASHIER_TINKOFF_CLIENT_ID: ${{ secrets.CASHIER_TINKOFF_CLIENT_ID }}" >> .env
+                    echo "CASHIER_TINKOFF_CLIENT_SECRET: ${{ secrets.CASHIER_TINKOFF_CLIENT_SECRET }}" >> .env
+
             -   name: Install dependencies
                 run: composer update --prefer-stable --prefer-dist --no-progress --no-interaction
 
             -   name: Execute tests
-                env:
-                    CASHIER_TINKOFF_CLIENT_ID: ${{ secrets.CASHIER_TINKOFF_CLIENT_ID }}
-                    CASHIER_TINKOFF_CLIENT_SECRET: ${{ secrets.CASHIER_TINKOFF_CLIENT_SECRET }}
                 run: |
                     mkdir -p build/logs
                     sudo vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
