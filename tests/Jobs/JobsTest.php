@@ -7,6 +7,7 @@ use Helldar\Cashier\Facades\Config\Payment as PaymentConfig;
 use Helldar\Cashier\Services\Jobs;
 use Helldar\Support\Facades\Http\Url;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Tests\Fixtures\Factories\Payment;
 use Tests\Fixtures\Models\RequestPayment;
 use Tests\TestCase;
@@ -19,8 +20,8 @@ class JobsTest extends TestCase
 
     public function testStart()
     {
-        $this->assertDatabaseCount('payments', 0);
-        $this->assertDatabaseCount('cashier_details', 0);
+        $this->assertSame(0, DB::table('payments')->count());
+        $this->assertSame(0, DB::table('cashier_details')->count());
 
         $payment = $this->payment();
 
@@ -28,8 +29,8 @@ class JobsTest extends TestCase
 
         $payment->refresh();
 
-        $this->assertDatabaseCount('payments', 1);
-        $this->assertDatabaseCount('cashier_details', 1);
+        $this->assertSame(1, DB::table('payments')->count());
+        $this->assertSame(1, DB::table('cashier_details')->count());
 
         $this->assertIsString($payment->cashier->external_id);
         $this->assertMatchesRegularExpression('/^(\d+)$/', $payment->cashier->external_id);
@@ -46,8 +47,8 @@ class JobsTest extends TestCase
 
     public function testCheck()
     {
-        $this->assertDatabaseCount('payments', 0);
-        $this->assertDatabaseCount('cashier_details', 0);
+        $this->assertSame(0, DB::table('payments')->count());
+        $this->assertSame(0, DB::table('cashier_details')->count());
 
         $payment = $this->payment();
 
@@ -56,8 +57,8 @@ class JobsTest extends TestCase
 
         $payment->refresh();
 
-        $this->assertDatabaseCount('payments', 1);
-        $this->assertDatabaseCount('cashier_details', 1);
+        $this->assertSame(1, DB::table('payments')->count());
+        $this->assertSame(1, DB::table('cashier_details')->count());
 
         $this->assertIsString($payment->cashier->external_id);
         $this->assertMatchesRegularExpression('/^(\d+)$/', $payment->cashier->external_id);
@@ -74,8 +75,8 @@ class JobsTest extends TestCase
 
     public function testRefund()
     {
-        $this->assertDatabaseCount('payments', 0);
-        $this->assertDatabaseCount('cashier_details', 0);
+        $this->assertSame(0, DB::table('payments')->count());
+        $this->assertSame(0, DB::table('cashier_details')->count());
 
         $payment = $this->payment();
 
@@ -89,8 +90,8 @@ class JobsTest extends TestCase
 
         $payment->refresh();
 
-        $this->assertDatabaseCount('payments', 1);
-        $this->assertDatabaseCount('cashier_details', 1);
+        $this->assertSame(1, DB::table('payments')->count());
+        $this->assertSame(1, DB::table('cashier_details')->count());
 
         $this->assertIsString($payment->cashier->external_id);
         $this->assertMatchesRegularExpression('/^(\d+)$/', $payment->cashier->external_id);

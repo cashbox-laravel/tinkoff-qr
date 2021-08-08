@@ -8,6 +8,7 @@ use Helldar\Cashier\Providers\ObserverServiceProvider;
 use Helldar\Cashier\Providers\ServiceProvider;
 use Helldar\Support\Facades\Http\Url;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Tests\Fixtures\Factories\Payment;
 use Tests\Fixtures\Models\RequestPayment;
 use Tests\TestCase;
@@ -20,15 +21,15 @@ class ObserverTest extends TestCase
 
     public function testCreate(): RequestPayment
     {
-        $this->assertDatabaseCount('payments', 0);
-        $this->assertDatabaseCount('cashier_details', 0);
+        $this->assertSame(0, DB::table('payments')->count());
+        $this->assertSame(0, DB::table('cashier_details')->count());
 
         $payment = $this->payment();
 
         $payment->refresh();
 
-        $this->assertDatabaseCount('payments', 1);
-        $this->assertDatabaseCount('cashier_details', 1);
+        $this->assertSame(1, DB::table('payments')->count());
+        $this->assertSame(1, DB::table('cashier_details')->count());
 
         $this->assertIsString($payment->cashier->external_id);
         $this->assertMatchesRegularExpression('/^(\d+)$/', $payment->cashier->external_id);
@@ -55,8 +56,8 @@ class ObserverTest extends TestCase
 
         $payment->refresh();
 
-        $this->assertDatabaseCount('payments', 1);
-        $this->assertDatabaseCount('cashier_details', 1);
+        $this->assertSame(1, DB::table('payments')->count());
+        $this->assertSame(1, DB::table('cashier_details')->count());
 
         $this->assertIsString($payment->cashier->external_id);
         $this->assertMatchesRegularExpression('/^(\d+)$/', $payment->cashier->external_id);
