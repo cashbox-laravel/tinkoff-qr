@@ -26,8 +26,10 @@ use Helldar\CashierDriver\Tinkoff\QrCode\Driver;
 use Helldar\Contracts\Cashier\Http\Request;
 use Helldar\Contracts\Cashier\Resources\Details;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
+use Illuminate\Database\Schema\Builder;
 use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
 use Orchestra\Testbench\TestCase as BaseTestCase;
+use Tests\database\seeders\DatabaseSeeder;
 use Tests\Fixtures\Models\ReadyPayment;
 use Tests\Fixtures\Resources\Model;
 
@@ -60,6 +62,13 @@ abstract class TestCase extends BaseTestCase
     protected $loadEnvironmentVariables = true;
 
     protected $model = ReadyPayment::class;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Builder::defaultMorphKeyType('uuid');
+    }
 
     protected function getPackageProviders($app): array
     {
@@ -148,5 +157,12 @@ abstract class TestCase extends BaseTestCase
     protected function getTerminalSecret(): string
     {
         return config('cashier.drivers.tinkoff_qr.client_secret');
+    }
+
+    protected function runSeeders()
+    {
+        $seeder = new DatabaseSeeder();
+
+        $seeder->run();
     }
 }

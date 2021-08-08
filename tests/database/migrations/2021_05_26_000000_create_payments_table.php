@@ -26,7 +26,7 @@ class CreatePaymentsTable extends Migration
     public function up()
     {
         Schema::create($this->table, function (Blueprint $table) {
-            $table->unsignedBigInteger('id');
+            $table->uuid('uuid');
 
             $table->smallInteger('type_id');
             $table->smallInteger('status_id');

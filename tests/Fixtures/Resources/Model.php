@@ -30,7 +30,7 @@ class Model extends BaseModel
 
     protected function paymentId(): string
     {
-        return $this->model->id;
+        return $this->model->uuid;
     }
 
     protected function sum(): float

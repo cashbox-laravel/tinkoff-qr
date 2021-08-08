@@ -20,7 +20,7 @@ declare(strict_types=1);
 namespace Tests\Fixtures\Models;
 
 use Helldar\Cashier\Concerns\Casheable;
-use Illuminate\Database\Eloquent\Model;
+use Helldar\LaravelSupport\Eloquent\UuidModel;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
@@ -30,25 +30,13 @@ use Tests\TestCase;
  * @property int $currency
  * @property int $status_id
  * @property int $type_id
- * @property string $id;
+ * @property string $uuid;
  */
-class ReadyPayment extends Model
+class ReadyPayment extends UuidModel
 {
     use Casheable;
 
-    protected $fillable = ['id', 'type_id', 'status_id', 'sum', 'currency', 'created_at'];
-
-    protected $casts = [
-        'id' => 'integer',
-
-        'type_id'   => 'integer',
-        'status_id' => 'integer',
-
-        'sum'      => 'float',
-        'currency' => 'integer',
-    ];
-
-    protected function getIdAttribute(): string
+    protected function getUuidAttribute(): string
     {
         return TestCase::PAYMENT_ID;
     }

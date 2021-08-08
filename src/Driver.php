@@ -40,9 +40,7 @@ class Driver extends BaseDriver
 
     public function start(): Response
     {
-        $initialized = $this->init();
-
-        $this->initialized($initialized);
+        $this->init();
 
         $request = GetQR::make($this->model);
 
@@ -63,17 +61,18 @@ class Driver extends BaseDriver
         return $this->request($request, Refund::class);
     }
 
-    protected function init(): Response
+    protected function init(): void
     {
         $request = Init::make($this->model);
 
-        return $this->request($request, Responses\Init::class);
-    }
+        $response = $this->request($request, Responses\Init::class);
 
-    protected function initialized(Response $initialized): void
-    {
-        $external_id = $initialized->getExternalId();
+        $external_id = $response->getExternalId();
 
-        $this->payment->cashier()->updateOrCreate(compact('external_id'));
+        $details = $this->details($response->toArray());
+
+        $this->payment->cashier()->updateOrCreate(compact('external_id'), compact('details'));
+
+        $this->payment->refresh();
     }
 }

@@ -3,7 +3,7 @@
 namespace Tests\Fixtures\Models;
 
 use Helldar\Cashier\Concerns\Casheable;
-use Illuminate\Database\Eloquent\Model;
+use Helldar\LaravelSupport\Eloquent\UuidModel;
 
 /**
  * @property \Illuminate\Support\Carbon $created_at
@@ -13,17 +13,15 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $type_id
  * @property string $id;
  */
-class RequestPayment extends Model
+class RequestPayment extends UuidModel
 {
     use Casheable;
 
     protected $table = 'payments';
 
-    protected $fillable = ['id', 'type_id', 'status_id', 'sum', 'currency'];
+    protected $fillable = ['type_id', 'status_id', 'sum', 'currency'];
 
     protected $casts = [
-        'id' => 'integer',
-
         'type_id'   => 'integer',
         'status_id' => 'integer',
 
