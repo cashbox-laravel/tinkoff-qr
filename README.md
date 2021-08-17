@@ -29,6 +29,36 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 
 > See [parent](https://github.com/andrey-helldar/cashier#readme) project.
 
+Edit the `config/cashier.php` file:
+
+```php
+use App\Models\Payment;
+use App\Payments\Details;
+use Helldar\Cashier\Constants\Driver;
+use Helldar\CashierDriver\Tinkoff\QrCode\Driver as TinkoffQrDriver;
+
+return [
+    //
+
+    'payment' => [
+        'map' => [
+            Payment::TYPE_TINKOFF => 'tinkoff_qr'
+        ]
+    ],
+
+    'drivers' => [
+        'tinkoff_qr' => [
+            Driver::DRIVER => TinkoffQrDriver::class,
+
+            Driver::DETAILS => Details::class,
+
+            Driver::CLIENT_ID       => env('CASHIER_TINKOFF_CLIENT_ID'),
+            Driver::CLIENT_SECRET   => env('CASHIER_TINKOFF_CLIENT_SECRET'),
+        ]
+    ]
+];
+```
+
 ## For Enterprise
 
 Available as part of the Tidelift Subscription.
