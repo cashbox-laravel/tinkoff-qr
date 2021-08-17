@@ -29,11 +29,42 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 
 > See [parent](https://github.com/andrey-helldar/cashier#readme) project.
 
+Create resource file:
+
+```php
+namespace App\Payments;
+
+use Helldar\Cashier\Resources\Model;
+
+class Tinkoff extends Model
+{
+    protected function paymentId(): string
+    {
+        return (string) $this->model->id;
+    }
+
+    protected function sum(): float
+    {
+        return (float) $this->model->sum;
+    }
+
+    protected function currency(): int
+    {
+        return $this->model->currency;
+    }
+
+    protected function createdAt(): Carbon
+    {
+        return $this->model->created_at;
+    }
+}
+```
+
 Edit the `config/cashier.php` file:
 
 ```php
 use App\Models\Payment;
-use App\Payments\Details;
+use App\Payments\Tinkoff as TinkoffDetails;
 use Helldar\Cashier\Constants\Driver;
 use Helldar\CashierDriver\Tinkoff\QrCode\Driver as TinkoffQrDriver;
 
@@ -50,7 +81,7 @@ return [
         'tinkoff_qr' => [
             Driver::DRIVER => TinkoffQrDriver::class,
 
-            Driver::DETAILS => Details::class,
+            Driver::DETAILS => TinkoffDetails::class,
 
             Driver::CLIENT_ID       => env('CASHIER_TINKOFF_CLIENT_ID'),
             Driver::CLIENT_SECRET   => env('CASHIER_TINKOFF_CLIENT_SECRET'),
