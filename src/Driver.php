@@ -42,9 +42,7 @@ class Driver extends BaseDriver
     {
         $this->init();
 
-        if(empty($this->model->getExternalId())) {
-
-        }
+        $this->model->refresh();
 
         $request = GetQR::make($this->model);
 
@@ -76,7 +74,5 @@ class Driver extends BaseDriver
         $details = $this->details($response->toArray());
 
         $this->payment->cashier()->updateOrCreate(compact('external_id'), compact('details'));
-
-        $this->payment->refresh();
     }
 }
