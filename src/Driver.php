@@ -71,7 +71,11 @@ class Driver extends BaseDriver
 
         $details = $this->details($response->toArray());
 
-        $this->payment->cashier()->updateOrCreate(compact('external_id'), compact('details'));
+        $content = compact('external_id', 'details');
+
+        $this->payment->cashier()->exists()
+            ? $this->payment->cashier()->update($content)
+            : $this->payment->cashier()->create($content);
 
         $this->model->refresh();
     }
