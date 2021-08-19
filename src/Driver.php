@@ -17,6 +17,7 @@
 
 namespace Helldar\CashierDriver\Tinkoff\QrCode;
 
+use Helldar\Cashier\Facades\Helpers\Model;
 use Helldar\Cashier\Services\Driver as BaseDriver;
 use Helldar\CashierDriver\Tinkoff\QrCode\Exceptions\Manager;
 use Helldar\CashierDriver\Tinkoff\QrCode\Helpers\Statuses;
@@ -71,12 +72,6 @@ class Driver extends BaseDriver
 
         $details = $this->details($response->toArray());
 
-        $content = compact('external_id', 'details');
-
-        $this->payment->cashier()->exists()
-            ? $this->payment->cashier()->update($content)
-            : $this->payment->cashier()->create($content);
-
-        $this->model->refresh();
+        Model::updateOrCreate($this->payment, compact('external_id', 'details'));
     }
 }
