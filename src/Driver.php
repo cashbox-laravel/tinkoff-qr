@@ -42,6 +42,10 @@ class Driver extends BaseDriver
     {
         $this->init();
 
+        if(empty($this->model->getExternalId())) {
+
+        }
+
         $request = GetQR::make($this->model);
 
         return $this->request($request, QrCode::class);
