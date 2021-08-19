@@ -45,7 +45,6 @@ class Driver extends BaseDriver
 
         $request = GetQR::make($this->model);
 
-dd($this->model->getExternalId());
         return $this->request($request, QrCode::class);
     }
 
@@ -75,10 +74,6 @@ dd($this->model->getExternalId());
 
         Model::updateOrCreate($this->payment, compact('external_id', 'details'));
 
-        // $this->payment->cashier()->exists()
-        //     ? $this->payment->cashier()->update(compact('external_id', 'details'))
-        //     : $this->payment->cashier()->create(compact('external_id', 'details'));
-
-        // $this->payment->refresh();
+        $this->payment->refresh();
     }
 }
