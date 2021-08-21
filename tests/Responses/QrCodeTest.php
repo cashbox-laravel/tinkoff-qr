@@ -61,8 +61,8 @@ class QrCodeTest extends TestCase
         $response->put('Status', self::STATUS);
 
         $this->assertSame([
-            QrCode::KEY_URL    => self::URL,
             QrCode::KEY_STATUS => self::STATUS,
+            QrCode::KEY_URL    => self::URL,
         ], $response->toArray());
     }
 
