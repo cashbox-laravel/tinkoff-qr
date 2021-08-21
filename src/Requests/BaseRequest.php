@@ -20,7 +20,7 @@ declare(strict_types=1);
 namespace Helldar\CashierDriver\Tinkoff\QrCode\Requests;
 
 use Helldar\Cashier\Http\Request;
-use Helldar\CashierDriver\Tinkoff\Auth\Support\Auth;
+use Helldar\CashierDriver\Tinkoff\Auth\Auth;
 
 abstract class BaseRequest extends Request
 {
