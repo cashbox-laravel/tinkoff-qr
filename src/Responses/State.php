@@ -28,4 +28,9 @@ class State extends Response
 
         self::KEY_STATUS => 'Status',
     ];
+
+    public function isEmpty(): bool
+    {
+        return empty($this->getExternalId()) || empty($this->getStatus());
+    }
 }
