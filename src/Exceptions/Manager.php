@@ -20,6 +20,7 @@ namespace Helldar\CashierDriver\Tinkoff\QrCode\Exceptions;
 use Helldar\Cashier\Exceptions\Http\BankInternalErrorException;
 use Helldar\Cashier\Exceptions\Http\BuyerNotFoundClientException;
 use Helldar\Cashier\Exceptions\Http\ContactTheSellerClientException;
+use Helldar\Cashier\Exceptions\Http\PaymentTypeNotAvailableException;
 use Helldar\Cashier\Exceptions\Http\TryAgainLaterClientException;
 use Helldar\Cashier\Exceptions\Manager as ExceptionManager;
 
@@ -47,6 +48,8 @@ class Manager extends ExceptionManager
         1089 => TryAgainLaterClientException::class,
         1091 => TryAgainLaterClientException::class,
         1096 => TryAgainLaterClientException::class,
+
+        3001 => PaymentTypeNotAvailableException::class,
 
         9999 => BankInternalErrorException::class,
     ];
