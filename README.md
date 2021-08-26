@@ -29,6 +29,8 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 > **Note**:
 >
 > This project is the driver for [Cashier](https://github.com/andrey-helldar/cashier).
+>
+> Terminal Key and Secret must be provided by the bank manager in response to the agreement concluded with the bank.
 
 
 ### Configuration
