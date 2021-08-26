@@ -97,6 +97,8 @@ class Tinkoff extends Model
 }
 ```
 
+#### Custom Authentication
+
 In some cases, the application can send requests to the bank from different terminals. For example, when one application serves payments of several companies.
 
 In order for the payment to be authorized with the required authorization data, you can override the `clientId` and `clientSecret` methods:
