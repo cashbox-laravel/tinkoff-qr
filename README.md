@@ -42,7 +42,6 @@ use Helldar\Cashier\Constants\Driver;
 use Helldar\CashierDriver\Tinkoff\QrCode\Driver as TinkoffQrDriver;
 
 return [
-
     'payment' => [
         'map' => [
             Payment::TYPE_TINKOFF => 'tinkoff_qr'
