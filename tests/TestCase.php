@@ -85,8 +85,8 @@ abstract class TestCase extends BaseTestCase
             DriverConstant::DRIVER  => Driver::class,
             DriverConstant::DETAILS => Model::class,
 
-            DriverConstant::CLIENT_ID     => env('CASHIER_TINKOFF_CLIENT_ID'),
-            DriverConstant::CLIENT_SECRET => env('CASHIER_TINKOFF_CLIENT_SECRET'),
+            DriverConstant::CLIENT_ID     => env('CASHIER_TINKOFF_QR_CLIENT_ID'),
+            DriverConstant::CLIENT_SECRET => env('CASHIER_TINKOFF_QR_CLIENT_SECRET'),
         ]);
     }
 
