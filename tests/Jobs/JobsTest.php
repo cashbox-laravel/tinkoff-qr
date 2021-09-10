@@ -6,7 +6,6 @@ use Helldar\Cashier\Constants\Status;
 use Helldar\Cashier\Facades\Config\Payment as PaymentConfig;
 use Helldar\Cashier\Services\Jobs;
 use Helldar\Support\Facades\Http\Url;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Tests\Fixtures\Factories\Payment;
 use Tests\Fixtures\Models\RequestPayment;
@@ -14,8 +13,6 @@ use Tests\TestCase;
 
 class JobsTest extends TestCase
 {
-    use RefreshDatabase;
-
     protected $model = RequestPayment::class;
 
     public function testStart()
