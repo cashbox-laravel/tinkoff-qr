@@ -81,6 +81,8 @@ abstract class TestCase extends BaseTestCase
             self::MODEL_TYPE_ID => 'tinkoff_qr',
         ]);
 
+        $config->set('cashier.logs.enabled', false);
+
         $config->set('cashier.drivers.tinkoff_qr', [
             DriverConstant::DRIVER  => Driver::class,
             DriverConstant::DETAILS => Model::class,
