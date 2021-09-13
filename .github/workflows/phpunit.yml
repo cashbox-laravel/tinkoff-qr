@@ -13,15 +13,19 @@ jobs:
 
         name: PHP ${{ matrix.php }}, Laravel ${{ matrix.laravel }}
 
+        services:
+            mysql:
+                image: mysql:8.0
+                env:
+                    MYSQL_ROOT_PASSWORD: root
+                    MYSQL_DATABASE: default
+                ports:
+                    - 3306:3306
+                options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3 --default_authentication_plugin=caching_sha2_password
+
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v2
-
-            -   name: Setup MySQL
-                uses: mirromutth/mysql-action@v1.1
-                with:
-                    mysql root password: root
-                    mysql database: default
 
             -   name: Setup PHP
                 uses: shivammathur/setup-php@v2
