@@ -30,7 +30,7 @@ class QrCode extends Response
 
         self::KEY_STATUS => 'Status',
 
-        self::KEY_URL => 'PaymentURL',
+        self::KEY_URL => 'Data',
     ];
 
     public function getUrl(): ?string
