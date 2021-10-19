@@ -42,6 +42,7 @@ class StatusesTest extends TestCase
         $this->assertFalse($this->status('AUTHORIZED')->hasCreated('AUTHORIZED'));
         $this->assertFalse($this->status('AUTHORIZING')->hasCreated('AUTHORIZING'));
         $this->assertFalse($this->status('CONFIRMING')->hasCreated('CONFIRMING'));
+
         $this->assertFalse($this->status('REFUNDING')->hasCreated('REFUNDING'));
 
         $this->assertFalse($this->status('PARTIAL_REFUNDED')->hasCreated('PARTIAL_REFUNDED'));
@@ -66,6 +67,7 @@ class StatusesTest extends TestCase
         $this->assertFalse($this->status('AUTHORIZED')->hasSuccess('AUTHORIZED'));
         $this->assertFalse($this->status('AUTHORIZING')->hasSuccess('AUTHORIZING'));
         $this->assertFalse($this->status('CONFIRMING')->hasSuccess('CONFIRMING'));
+
         $this->assertFalse($this->status('REFUNDING')->hasSuccess('REFUNDING'));
 
         $this->assertFalse($this->status('PARTIAL_REFUNDED')->hasSuccess('PARTIAL_REFUNDED'));
@@ -90,6 +92,7 @@ class StatusesTest extends TestCase
         $this->assertFalse($this->status('AUTHORIZED')->hasFailed('AUTHORIZED'));
         $this->assertFalse($this->status('AUTHORIZING')->hasFailed('AUTHORIZING'));
         $this->assertFalse($this->status('CONFIRMING')->hasFailed('CONFIRMING'));
+
         $this->assertFalse($this->status('REFUNDING')->hasFailed('REFUNDING'));
 
         $this->assertFalse($this->status('PARTIAL_REFUNDED')->hasFailed('PARTIAL_REFUNDED'));
@@ -111,9 +114,10 @@ class StatusesTest extends TestCase
         $this->assertFalse($this->status('FORM_SHOWED')->hasRefunding('FORM_SHOWED'));
         $this->assertFalse($this->status('NEW')->hasRefunding('NEW'));
 
-        $this->assertTrue($this->status('AUTHORIZED')->hasRefunding('AUTHORIZED'));
-        $this->assertTrue($this->status('AUTHORIZING')->hasRefunding('AUTHORIZING'));
-        $this->assertTrue($this->status('CONFIRMING')->hasRefunding('CONFIRMING'));
+        $this->assertFalse($this->status('AUTHORIZED')->hasRefunding('AUTHORIZED'));
+        $this->assertFalse($this->status('AUTHORIZING')->hasRefunding('AUTHORIZING'));
+        $this->assertFalse($this->status('CONFIRMING')->hasRefunding('CONFIRMING'));
+
         $this->assertTrue($this->status('REFUNDING')->hasRefunding('REFUNDING'));
 
         $this->assertFalse($this->status('PARTIAL_REFUNDED')->hasRefunding('PARTIAL_REFUNDED'));
@@ -138,6 +142,7 @@ class StatusesTest extends TestCase
         $this->assertFalse($this->status('AUTHORIZED')->hasRefunded('AUTHORIZED'));
         $this->assertFalse($this->status('AUTHORIZING')->hasRefunded('AUTHORIZING'));
         $this->assertFalse($this->status('CONFIRMING')->hasRefunded('CONFIRMING'));
+
         $this->assertFalse($this->status('REFUNDING')->hasRefunded('REFUNDING'));
 
         $this->assertTrue($this->status('PARTIAL_REFUNDED')->hasRefunded('PARTIAL_REFUNDED'));
@@ -162,6 +167,7 @@ class StatusesTest extends TestCase
         $this->assertTrue($this->status('AUTHORIZED')->inProgress('AUTHORIZED'));
         $this->assertTrue($this->status('AUTHORIZING')->inProgress('AUTHORIZING'));
         $this->assertTrue($this->status('CONFIRMING')->inProgress('CONFIRMING'));
+
         $this->assertTrue($this->status('REFUNDING')->inProgress('REFUNDING'));
 
         $this->assertFalse($this->status('PARTIAL_REFUNDED')->inProgress('PARTIAL_REFUNDED'));
@@ -175,7 +181,7 @@ class StatusesTest extends TestCase
 
         $this->assertFalse($this->status('CONFIRMED')->inProgress('CONFIRMED'));
 
-        $this->assertFalse($this->status('UNKNOWN')->inProgress('UNKNOWN'));
+        $this->assertTrue($this->status('UNKNOWN')->inProgress('UNKNOWN'));
     }
 
     protected function status(string $status): Statuses
