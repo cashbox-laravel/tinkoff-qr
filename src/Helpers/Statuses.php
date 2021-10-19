@@ -27,9 +27,6 @@ class Statuses extends BaseStatus
     ];
 
     public const REFUNDING = [
-        'AUTHORIZED',
-        'AUTHORIZING',
-        'CONFIRMING',
         'REFUNDING',
     ];
 
