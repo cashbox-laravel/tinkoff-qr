@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the "andrey-helldar/cashier-tinkoff-qr" project.
+ * This file is part of the "cashier-provider/tinkoff-qr" project.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,23 +12,23 @@
  *
  * @license MIT
  *
- * @see https://github.com/andrey-helldar/cashier-tinkoff-qr
+ * @see https://github.com/cashier-provider/tinkoff-qr
  */
 
-namespace Helldar\CashierDriver\Tinkoff\QrCode;
+namespace CashierProvider\Tinkoff\QrCode;
 
-use Helldar\Cashier\Facades\Helpers\Model;
-use Helldar\Cashier\Services\Driver as BaseDriver;
-use Helldar\CashierDriver\Tinkoff\QrCode\Exceptions\Manager;
-use Helldar\CashierDriver\Tinkoff\QrCode\Helpers\Statuses;
-use Helldar\CashierDriver\Tinkoff\QrCode\Requests\Cancel;
-use Helldar\CashierDriver\Tinkoff\QrCode\Requests\GetQR;
-use Helldar\CashierDriver\Tinkoff\QrCode\Requests\GetState;
-use Helldar\CashierDriver\Tinkoff\QrCode\Requests\Init;
-use Helldar\CashierDriver\Tinkoff\QrCode\Resources\Details;
-use Helldar\CashierDriver\Tinkoff\QrCode\Responses\QrCode;
-use Helldar\CashierDriver\Tinkoff\QrCode\Responses\Refund;
-use Helldar\CashierDriver\Tinkoff\QrCode\Responses\State;
+use CashierProvider\Core\Facades\Helpers\Model;
+use CashierProvider\Core\Services\Driver as BaseDriver;
+use CashierProvider\Tinkoff\QrCode\Exceptions\Manager;
+use CashierProvider\Tinkoff\QrCode\Helpers\Statuses;
+use CashierProvider\Tinkoff\QrCode\Requests\Cancel;
+use CashierProvider\Tinkoff\QrCode\Requests\GetQR;
+use CashierProvider\Tinkoff\QrCode\Requests\GetState;
+use CashierProvider\Tinkoff\QrCode\Requests\Init;
+use CashierProvider\Tinkoff\QrCode\Resources\Details;
+use CashierProvider\Tinkoff\QrCode\Responses\QrCode;
+use CashierProvider\Tinkoff\QrCode\Responses\Refund;
+use CashierProvider\Tinkoff\QrCode\Responses\State;
 use Helldar\Contracts\Cashier\Http\Response;
 
 class Driver extends BaseDriver

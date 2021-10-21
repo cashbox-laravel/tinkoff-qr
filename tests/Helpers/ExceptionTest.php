@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the "andrey-helldar/cashier-tinkoff-qr" project.
+ * This file is part of the "cashier-provider/tinkoff-qr" project.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,16 +12,16 @@
  *
  * @license MIT
  *
- * @see https://github.com/andrey-helldar/cashier-tinkoff-qr
+ * @see https://github.com/cashier-provider/tinkoff-qr
  */
 
 namespace Tests\Helpers;
 
-use Helldar\Cashier\Exceptions\Http\BadRequestClientException;
-use Helldar\Cashier\Exceptions\Http\BaseException;
-use Helldar\Cashier\Exceptions\Http\BuyerNotFoundClientException;
-use Helldar\Cashier\Exceptions\Http\ContactTheSellerClientException;
-use Helldar\CashierDriver\Tinkoff\QrCode\Exceptions\Manager;
+use CashierProvider\Core\Exceptions\Http\BadRequestClientException;
+use CashierProvider\Core\Exceptions\Http\BaseException;
+use CashierProvider\Core\Exceptions\Http\BuyerNotFoundClientException;
+use CashierProvider\Core\Exceptions\Http\ContactTheSellerClientException;
+use CashierProvider\Tinkoff\QrCode\Exceptions\Manager;
 use Helldar\Contracts\Http\Builder as HttpBuilder;
 use Helldar\Support\Facades\Http\Builder;
 use Tests\TestCase;
