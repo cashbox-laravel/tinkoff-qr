@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the "andrey-helldar/cashier-tinkoff-qr" project.
+ * This file is part of the "cashier-provider/tinkoff-qr" project.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,17 +12,17 @@
  *
  * @license MIT
  *
- * @see https://github.com/andrey-helldar/cashier-tinkoff-qr
+ * @see https://github.com/cashier-provider/tinkoff-qr
  */
 
 namespace Tests;
 
-use Helldar\Cashier\Config\Driver as DriverConfig;
-use Helldar\Cashier\Constants\Driver as DriverConstant;
-use Helldar\Cashier\Facades\Config\Payment as PaymentConfig;
-use Helldar\Cashier\Models\CashierDetail;
-use Helldar\Cashier\Providers\ServiceProvider;
-use Helldar\CashierDriver\Tinkoff\QrCode\Driver;
+use CashierProvider\Core\Config\Driver as DriverConfig;
+use CashierProvider\Core\Constants\Driver as DriverConstant;
+use CashierProvider\Core\Facades\Config\Payment as PaymentConfig;
+use CashierProvider\Core\Models\CashierDetail;
+use CashierProvider\Core\Providers\ServiceProvider;
+use CashierProvider\Tinkoff\QrCode\Driver;
 use Helldar\Contracts\Cashier\Http\Request;
 use Helldar\Contracts\Cashier\Resources\Details;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
@@ -95,7 +95,7 @@ abstract class TestCase extends BaseTestCase
     protected function defineDatabaseMigrations()
     {
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
-        $this->loadMigrationsFrom(__DIR__ . '/../vendor/andrey-helldar/cashier/database/migrations/main');
+        $this->loadMigrationsFrom(__DIR__ . '/../vendor/cashier-provider/core/database/migrations/main');
     }
 
     protected function model(Details $details = null): ReadyPayment
@@ -120,7 +120,7 @@ abstract class TestCase extends BaseTestCase
     }
 
     /**
-     * @param  \Helldar\CashierDriver\Tinkoff\QrCode\Requests\BaseRequest|string  $request
+     * @param  \CashierProvider\Tinkoff\QrCode\Requests\BaseRequest|string  $request
      *
      * @return \Helldar\Contracts\Cashier\Http\Request
      */

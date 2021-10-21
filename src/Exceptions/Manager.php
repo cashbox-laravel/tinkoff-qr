@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the "andrey-helldar/cashier-tinkoff-qr" project.
+ * This file is part of the "cashier-provider/tinkoff-qr" project.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,24 +12,24 @@
  *
  * @license MIT
  *
- * @see https://github.com/andrey-helldar/cashier-tinkoff-qr
+ * @see https://github.com/cashier-provider/tinkoff-qr
  */
 
-namespace Helldar\CashierDriver\Tinkoff\QrCode\Exceptions;
+namespace CashierProvider\Tinkoff\QrCode\Exceptions;
 
-use Helldar\Cashier\Exceptions\Http\BankInternalErrorException;
-use Helldar\Cashier\Exceptions\Http\BuyerNotFoundClientException;
-use Helldar\Cashier\Exceptions\Http\CardHasStolenException;
-use Helldar\Cashier\Exceptions\Http\ContactTheSellerClientException;
-use Helldar\Cashier\Exceptions\Http\InsufficientFundsCardException;
-use Helldar\Cashier\Exceptions\Http\InvalidCardException;
-use Helldar\Cashier\Exceptions\Http\PaymentCompletedException;
-use Helldar\Cashier\Exceptions\Http\PaymentDeclinedException;
-use Helldar\Cashier\Exceptions\Http\PaymentTypeNotAvailableException;
-use Helldar\Cashier\Exceptions\Http\SumException;
-use Helldar\Cashier\Exceptions\Http\TooManyRequestsException;
-use Helldar\Cashier\Exceptions\Http\TryAgainLaterClientException;
-use Helldar\Cashier\Exceptions\Manager as ExceptionManager;
+use CashierProvider\Core\Exceptions\Http\BankInternalErrorException;
+use CashierProvider\Core\Exceptions\Http\BuyerNotFoundClientException;
+use CashierProvider\Core\Exceptions\Http\CardHasStolenException;
+use CashierProvider\Core\Exceptions\Http\ContactTheSellerClientException;
+use CashierProvider\Core\Exceptions\Http\InsufficientFundsCardException;
+use CashierProvider\Core\Exceptions\Http\InvalidCardException;
+use CashierProvider\Core\Exceptions\Http\PaymentCompletedException;
+use CashierProvider\Core\Exceptions\Http\PaymentDeclinedException;
+use CashierProvider\Core\Exceptions\Http\PaymentTypeNotAvailableException;
+use CashierProvider\Core\Exceptions\Http\SumException;
+use CashierProvider\Core\Exceptions\Http\TooManyRequestsException;
+use CashierProvider\Core\Exceptions\Http\TryAgainLaterClientException;
+use CashierProvider\Core\Exceptions\Manager as ExceptionManager;
 
 class Manager extends ExceptionManager
 {

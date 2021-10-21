@@ -2,7 +2,7 @@
 
 namespace Tests\Fixtures\Models;
 
-use Helldar\Cashier\Concerns\Casheable;
+use CashierProvider\Core\Concerns\Casheable;
 use Helldar\LaravelSupport\Eloquent\UuidModel;
 
 /**

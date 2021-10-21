@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the "andrey-helldar/cashier-tinkoff-qr" project.
+ * This file is part of the "cashier-provider/tinkoff-qr" project.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,13 +12,13 @@
  *
  * @license MIT
  *
- * @see https://github.com/andrey-helldar/cashier-tinkoff-qr
+ * @see https://github.com/cashier-provider/tinkoff-qr
  */
 
 namespace Tests\Resources;
 
-use Helldar\Cashier\Resources\Details as BaseDetails;
-use Helldar\CashierDriver\Tinkoff\QrCode\Resources\Details;
+use CashierProvider\Core\Resources\Details as BaseDetails;
+use CashierProvider\Tinkoff\QrCode\Resources\Details;
 use Helldar\Contracts\Cashier\Resources\Details as DetailsContract;
 use Tests\TestCase;
 

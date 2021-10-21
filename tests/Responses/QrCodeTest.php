@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the "andrey-helldar/cashier-tinkoff-qr" project.
+ * This file is part of the "cashier-provider/tinkoff-qr" project.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,12 +12,12 @@
  *
  * @license MIT
  *
- * @see https://github.com/andrey-helldar/cashier-tinkoff-qr
+ * @see https://github.com/cashier-provider/tinkoff-qr
  */
 
 namespace Tests\Responses;
 
-use Helldar\CashierDriver\Tinkoff\QrCode\Responses\QrCode;
+use CashierProvider\Tinkoff\QrCode\Responses\QrCode;
 use Helldar\Contracts\Cashier\Http\Response;
 use Tests\TestCase;
 
@@ -67,7 +67,7 @@ class QrCodeTest extends TestCase
     }
 
     /**
-     * @return \Helldar\CashierDriver\Tinkoff\QrCode\Responses\QrCode|\Helldar\Contracts\Cashier\Http\Response
+     * @return \CashierProvider\Tinkoff\QrCode\Responses\QrCode|\Helldar\Contracts\Cashier\Http\Response
      */
     protected function response(): Response
     {

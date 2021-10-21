@@ -11,7 +11,7 @@
 To get the latest version of `Tinkoff QR Cashier Driver`, simply require the project using [Composer](https://getcomposer.org):
 
 ```bash
-$ composer require andrey-helldar/cashier-tinkoff-qr
+$ composer require cashier-provider/tinkoff-qr
 ```
 
 Or manually update `require` block of `composer.json` and run `composer update`.
@@ -19,7 +19,7 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 ```json
 {
     "require": {
-        "andrey-helldar/cashier-tinkoff-qr": "^1.0"
+        "cashier-provider/tinkoff-qr": "^1.0"
     }
 }
 ```
@@ -28,7 +28,7 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 
 > **Note**:
 >
-> This project is the driver for [Cashier](https://github.com/andrey-helldar/cashier).
+> This project is the driver for [Cashier](https://github.com/cashier-provider/core).
 >
 > Terminal Key and Secret must be provided by the bank manager in response to the agreement concluded with the bank.
 
@@ -40,8 +40,8 @@ Add your driver information to the `config/cashier.php` file:
 ```php
 use App\Models\Payment;
 use App\Payments\Tinkoff as TinkoffQrDetails;
-use Helldar\Cashier\Constants\Driver;
-use Helldar\CashierDriver\Tinkoff\QrCode\Driver as TinkoffQrDriver;
+use CashierProvider\Core\Constants\Driver;
+use CashierProvider\Tinkoff\QrCode\Driver as TinkoffQrDriver;
 
 return [
     'payment' => [
@@ -64,14 +64,14 @@ return [
 
 ### Resource
 
-Create a model resource class inheriting from `Helldar\Cashier\Resources\Model` in your application.
+Create a model resource class inheriting from `CashierProvider\Core\Resources\Model` in your application.
 
 Use the `$this->model` link to refer to the payment model. When executed, the `$model` parameter will contain the payment instance.
 
 ```php
 namespace App\Payments;
 
-use Helldar\Cashier\Resources\Model;
+use CashierProvider\Core\Resources\Model;
 
 class Tinkoff extends Model
 {
@@ -107,7 +107,7 @@ In order for the payment to be authorized with the required authorization data, 
 namespace App\Payments;
 
 use App\Models\Payment;
-use Helldar\Cashier\Resources\Model;
+use CashierProvider\Core\Resources\Model;
 use Illuminate\Database\Eloquent\Builder;
 
 class Tinkoff extends Model
@@ -160,7 +160,7 @@ class Tinkoff extends Model
 
 ### Response
 
-All requests to the bank and processing of responses are carried out by the [`Cashier`](https://github.com/andrey-helldar/cashier) project.
+All requests to the bank and processing of responses are carried out by the [`Cashier`](https://github.com/cashier-provider/core) project.
 
 To get a link, contact him through the cast:
 
@@ -201,19 +201,19 @@ $payment->cashier->details->toArray(): array
 
 Available as part of the Tidelift Subscription.
 
-The maintainers of `andrey-helldar/cashier-tinkoff-qr` and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source
+The maintainers of `cashier-provider/tinkoff-qr` and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source
 packages you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact packages you
 use. [Learn more](https://tidelift.com/subscription/pkg/packagist-andrey-helldar-cashier-tinkoff-qr?utm_source=packagist-andrey-helldar-cashier-tinkoff&utm_medium=referral&utm_campaign=enterprise&utm_term=repo)
 .
 
-[badge_downloads]:      https://img.shields.io/packagist/dt/andrey-helldar/cashier-tinkoff-qr.svg?style=flat-square
+[badge_downloads]:      https://img.shields.io/packagist/dt/cashier-provider/tinkoff-qr.svg?style=flat-square
 
-[badge_license]:        https://img.shields.io/packagist/l/andrey-helldar/cashier-tinkoff-qr.svg?style=flat-square
+[badge_license]:        https://img.shields.io/packagist/l/cashier-provider/tinkoff-qr.svg?style=flat-square
 
-[badge_stable]:         https://img.shields.io/github/v/release/andrey-helldar/cashier-tinkoff-qr?label=stable&style=flat-square
+[badge_stable]:         https://img.shields.io/github/v/release/cashier-provider/tinkoff-qr?label=stable&style=flat-square
 
 [badge_unstable]:       https://img.shields.io/badge/unstable-dev--main-orange?style=flat-square
 
 [link_license]:         LICENSE
 
-[link_packagist]:       https://packagist.org/packages/andrey-helldar/cashier-tinkoff-qr
+[link_packagist]:       https://packagist.org/packages/cashier-provider/tinkoff-qr

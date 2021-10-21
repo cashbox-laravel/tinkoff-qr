@@ -2,9 +2,9 @@
 
 namespace Tests\Jobs;
 
-use Helldar\Cashier\Constants\Status;
-use Helldar\Cashier\Facades\Config\Payment as PaymentConfig;
-use Helldar\Cashier\Services\Jobs;
+use CashierProvider\Core\Constants\Status;
+use CashierProvider\Core\Facades\Config\Payment as PaymentConfig;
+use CashierProvider\Core\Services\Jobs;
 use Helldar\Support\Facades\Http\Url;
 use Illuminate\Support\Facades\DB;
 use Tests\Fixtures\Factories\Payment;
