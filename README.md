@@ -1,5 +1,7 @@
 # Tinkoff QR Cashier Driver
 
+<img src="https://preview.dragon-code.pro/cashier-provider/tinkoff-qr.svg?brand=laravel" alt="Tinkoff QR Cashier Driver"/>
+
 [![Stable Version][badge_stable]][link_packagist]
 [![Unstable Version][badge_unstable]][link_packagist]
 [![Total Downloads][badge_downloads]][link_packagist]
