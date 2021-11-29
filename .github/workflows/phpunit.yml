@@ -3,15 +3,18 @@ on: [ push ]
 
 jobs:
     build:
-        runs-on: ubuntu-20.04
+        runs-on: ubuntu-latest
 
         strategy:
             fail-fast: true
             matrix:
-                php: [ "7.3", "7.4", "8.0" ]
-                laravel: [ "6.0", "7.0", "8.0" ]
+                versions:
+                    - { php: "7.3", laravel: [ "6.0", "7.0", "8.0" ] }
+                    - { php: "7.4", laravel: [ "6.0", "7.0", "8.0" ] }
+                    - { php: "8.0", laravel: [ "6.0", "7.0", "8.0" ] }
+                    - { php: "8.1", laravel: [ "8.0" ] }
 
-        name: PHP ${{ matrix.php }}, Laravel ${{ matrix.laravel }}
+        name: PHP ${{ matrix.versions.php }}, Laravel ${{ matrix.versions.laravel }}
 
         services:
             mysql:
@@ -30,7 +33,7 @@ jobs:
             -   name: Setup PHP
                 uses: shivammathur/setup-php@v2
                 with:
-                    php-version: ${{ matrix.php }}
+                    php-version: ${{ matrix.versions.php }}
                     extensions: curl, mbstring, zip, pcntl, pdo, pdo_sqlite, iconv, bcmath
                     coverage: none
 
@@ -40,7 +43,7 @@ jobs:
                     echo "CASHIER_TINKOFF_QR_CLIENT_SECRET=${{ secrets.CASHIER_TINKOFF_QR_CLIENT_SECRET }}" >> .env
 
             -   name: Install dependencies
-                run: composer require laravel/framework:^${{ matrix.laravel }} --prefer-stable --prefer-dist --no-progress --no-interaction
+                run: composer require laravel/framework:^${{ matrix.versions.laravel }} --prefer-stable --prefer-dist --no-progress --no-interaction
 
             -   name: Execute tests
                 run: sudo vendor/bin/phpunit
