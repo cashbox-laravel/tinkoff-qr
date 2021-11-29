@@ -21,7 +21,7 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 ```json
 {
     "require": {
-        "cashier-provider/tinkoff-qr": "^1.0"
+        "cashier-provider/tinkoff-qr": "^2.0"
     }
 }
 ```
@@ -198,15 +198,6 @@ $payment->cashier->details->toArray(): array
 //     'status' => 'NEW'
 // ]
 ```
-
-## For Enterprise
-
-Available as part of the Tidelift Subscription.
-
-The maintainers of `cashier-provider/tinkoff-qr` and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source
-packages you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact packages you
-use. [Learn more](https://tidelift.com/subscription/pkg/packagist-andrey-helldar-cashier-tinkoff-qr?utm_source=packagist-andrey-helldar-cashier-tinkoff&utm_medium=referral&utm_campaign=enterprise&utm_term=repo)
-.
 
 [badge_downloads]:      https://img.shields.io/packagist/dt/cashier-provider/tinkoff-qr.svg?style=flat-square
 
